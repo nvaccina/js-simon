@@ -1,32 +1,63 @@
+//element
+const main = document.querySelector('main');
 const playBtn = document.getElementById('play');
 const message = document.querySelector('h1');
-
+const contatore = document.querySelector('p');
 const NUM_MAX = 5;
-let arrayNumeri = [];
+let arrayNumber = [];
+
+let time;
+let counter = 5;
 
 
-//AZIONE AL PLAY
-playBtn.addEventListener('click', play);
-
-//funzione play
-function play() {
+// AZIONE CLICK BOTTONE
+playBtn.addEventListener('click', () => {
   console.log('PLAY');
-  arrayNumeri = generatenumber();
-  message.innerHTML = `${arrayNumeri}` 
-  console.log(arrayNumeri);
+  arrayNumber = generatenumber();
+ // arrayNumeri.classList.remove('hide')
+  message.innerHTML = `${arrayNumber}` 
+  console.log(arrayNumber);
+
+  startSetTimeout();
+  printCounter();
+
+  time = setInterval(function() {
+    printCounter();
+  }, 1000)
+})
+
+// Funzione che dopo 5000ms interrompe il time e stampa il prompt per inserire i numeri
+function startSetTimeout() {
+  setTimeout(function() {
+    clearInterval(time);
+    counter = 0;
+    arrayNumber = generatenumber();
+    for (let i = 0; i < arrayNumber; i++) {
+      arrayNumber[i].classList.add('hide');
+    }
+    
+    let remeberNumber = prompt('Inserisci, uno alla volta, i numeri che hai visualizzato.');
+    contatore.innerHTML = remeberNumber;
+  }, 5000);
 }
 
-//genero 5 numeri
+// Funzione che stampa il valore del counter secondi nella pagina e decrementa il contatore
+function printCounter(){
+  contatore.innerHTML = `Hai rimasto solo ${counter} secondi per memorizzare i numeri`
+  counter--;
+}
+
+//Funzione che genera i 5 numeri random
 function generatenumber() {
-  const arrayNumeri = [];
-  while(arrayNumeri.length < NUM_MAX){
-    const numero = getRandomNumber(1, 10);
-    if(!arrayNumeri.includes(numero)) arrayNumeri.push(numero);
+  const arrayNumber = [];
+  while(arrayNumber.length < NUM_MAX){
+    const numero = getRandomNumber(1, 100);
+    if(!arrayNumber.includes(numero)) arrayNumber.push(numero);
   }
-  return arrayNumeri;
+  return arrayNumber;
 }
 
-//genero numeri random
+//Funziona che genera numeri random unici
 function getRandomNumber(min, max){
   let error = false;
   let errorMsg;
@@ -40,3 +71,4 @@ function getRandomNumber(min, max){
   }
   return Math.floor(Math.random()*(max - min + 1) + min);
 }
+
