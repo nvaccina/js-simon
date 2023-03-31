@@ -7,3 +7,6 @@ Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei num
 - Inserire una funzione per creare numeri random diversi tra loro;
 - Creo una funzione per estrarre 5 numeri random;
 - Creo un pulsante che al click mi mostra i 5 numeri random generati;
+- Con un timer faccio sparire i numeri dopo 5 secondi;
+- Creo una funzione per richiedere 5 volte di inserire i numeri visualizzati e inserisco i numeri in un array;
+- Confronto con un'altra funzine l'array dei numeri random con quello dei numeri inseriti dall'utente;
